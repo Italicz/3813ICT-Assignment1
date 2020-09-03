@@ -16,11 +16,12 @@ const backUrl = 'http://localhost:3000';
 })
 export class LoginComponent implements OnInit {
 
+  id:number = 0;
   email:string = "";
   username:string = "";
   password:string = "";
+  role:string = "";
   newuser:User;
-  userid="";
 
   constructor(private router: Router, private httpClient: HttpClient) { }
 
