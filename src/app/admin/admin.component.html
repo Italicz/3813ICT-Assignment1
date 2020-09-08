@@ -56,6 +56,28 @@
           </form>
         </div>
         <br>
+        <div>
+          <h3>Create Channel:</h3>
+          <form>
+                <div class="form-group">
+                  <label for="channelNameLabel">Channel Name</label>
+                  <input type="text" [(ngModel)]="channelName" name="channelName" id="channelName" class="form-control">
+                </div>
+                <button (click)="createChannel();" class="btn btn-info btn-md">Submit</button>
+          </form>
+        </div>
+        <br>
+        <div>
+          <h3>Delete Channel:</h3>
+          <form>
+                <div class="form-group">
+                  <label for="channelNameLabel">Channel Name</label>
+                  <input type="text" [(ngModel)]="removeChannel" name="channelName" id="channelName" class="form-control">
+                </div>
+                <button (click)="deleteChannel();" class="btn btn-info btn-md">Submit</button>
+          </form>
+        </div>
+        <br>
         <!--
             Add user to group
             Delete user from group

@@ -22,3 +22,5 @@ require('./routes/createuser.js')(app,path);
 require('./routes/deleteuser.js')(app,path);
 require('./routes/creategroup.js')(app,path);
 require('./routes/deletegroup.js')(app,path);
+require('./routes/createchannel.js')(app,path);
+require('./routes/deletechannel.js')(app,path);
