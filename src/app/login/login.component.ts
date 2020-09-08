@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         if (data.ok){
           this.newuser = new User(data.id, data.username, data.email, data.password, data.role, data.ok)
           localStorage.setItem('currentUser', JSON.stringify(this.newuser));
-          this.router.navigateByUrl("/account");
+          this.router.navigateByUrl("/chat");
         } else {
           alert ("Sorry, account credentials are not valid");
         }
