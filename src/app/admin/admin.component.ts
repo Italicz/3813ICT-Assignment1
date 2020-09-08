@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
   email:string;
   password:string;
   role:string;
+  removeUser:string;
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('currentUser'))
@@ -31,4 +32,13 @@ export class AdminComponent implements OnInit {
     })
   }
 
+  deleteUser(removeUser) {
+    this.userService.deleteUser(this.removeUser).subscribe((data: any) => {
+      if(data == false) {
+        alert("Error, this user doesn't exist");
+      } else {
+        alert("User deleted")
+      }
+    })
+  }
 }
