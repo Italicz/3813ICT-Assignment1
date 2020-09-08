@@ -1,6 +1,5 @@
 <body>
     <div class="login" *ngIf="user.role == 'SAdmin'">
-        <p>Only admin can see this</p>
         <div>
             <h3>Create a User:</h3>
             <form>
@@ -20,9 +19,10 @@
                     <label for="role">Role</label>
                     <input type="text" [(ngModel)]="role" name="role" class="form-control">
                   </div>
-                <button (click)="createAccount()" class="btn btn-info btn-md">Submit</button>
+                <button (click)="createAccount();" class="btn btn-info btn-md">Submit</button>
               </form>
         </div>
+        <br>
         <div>
           <h3>Delete User:</h3>
           <form>
@@ -30,34 +30,47 @@
                   <label for="username">Username</label>
                   <input type="text" [(ngModel)]="removeUser" name="username" class="form-control">
                 </div>
-                <button (click)="deleteUser(deleteUsername);" class="btn btn-info btn-md">Submit</button>
+                <button (click)="deleteUser();" class="btn btn-info btn-md">Submit</button>
           </form>
         </div>
-       
-
+        <br>
+       <div>
+          <h3>Create Group:</h3>
+          <form>
+                <div class="form-group">
+                  <label for="groupNameLabel">Group Name</label>
+                  <input type="text" [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
+                </div>
+                <button (click)="createGroup();" class="btn btn-info btn-md">Submit</button>
+          </form>
+        </div>
+        <br>
+        <div>
+          <h3>Delete Group:</h3>
+          <form>
+                <div class="form-group">
+                  <label for="groupNameLabel">Group Name</label>
+                  <input type="text" [(ngModel)]="removeGroup" name="groupName" id="groupName" class="form-control">
+                </div>
+                <button (click)="deleteGroup();" class="btn btn-info btn-md">Submit</button>
+          </form>
+        </div>
+        <br>
         <!--
-
-            Create Users
-            Delete Users
-
-            Create Groups
-            Delete Groups
-
             Add user to group
             Delete user from group
-
-            Add channels to group
-            Delete channels from group
-
-            Add user to channel
-            Delete user from channel
 
             Add Group admins
             Delete Group admins
 
             Add group assis
             Delete group assis
-
+            
+            Add channels to group
+            Delete channels from group
+            
+            Add user to channel
+            Delete user from channel
         -->
     </div>
 </body>

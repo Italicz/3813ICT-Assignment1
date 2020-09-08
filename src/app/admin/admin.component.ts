@@ -17,6 +17,8 @@ export class AdminComponent implements OnInit {
   password:string;
   role:string;
   removeUser:string;
+  groupName:string = '';
+  removeGroup:string;
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('currentUser'))
@@ -32,12 +34,32 @@ export class AdminComponent implements OnInit {
     })
   }
 
-  deleteUser(removeUser) {
+  deleteUser() {
     this.userService.deleteUser(this.removeUser).subscribe((data: any) => {
       if(data == false) {
         alert("Error, this user doesn't exist");
       } else {
         alert("User deleted")
+      }
+    })
+  }
+
+  createGroup() {
+    this.userService.createGroup(this.groupName).subscribe((data: any) => {
+      if(data == false) {
+        alert("Error, this group already exists");
+      } else {
+        alert("Group Created");
+      }
+    })
+  }
+
+  deleteGroup() {
+    this.userService.deleteGroup(this.removeGroup).subscribe((data: any) => {
+      if(data == false) {
+        alert("Error, this group doesn't exists");
+      } else {
+        alert("Group Deleted");
       }
     })
   }

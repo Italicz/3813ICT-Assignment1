@@ -20,3 +20,5 @@ var server = http.listen(3000, function(){
 require('./routes/auth.js')(app,path);
 require('./routes/createuser.js')(app,path);
 require('./routes/deleteuser.js')(app,path);
+require('./routes/creategroup.js')(app,path);
+require('./routes/deletegroup.js')(app,path);
