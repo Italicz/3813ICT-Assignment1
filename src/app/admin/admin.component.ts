@@ -30,20 +30,20 @@ export class AdminComponent implements OnInit {
 
   createAccount() {
     this.userService.createUser(this.username, this.email, this.password, this.role).subscribe((data: any) => {
-      if (data == false) {
+      if (!data.ok) {
         alert("Error, user already exists");
       } else {
-        alert("User created");
+        alert("User created: " + data.username);
       }
     })
   }
 
   deleteUser() {
     this.userService.deleteUser(this.removeUser).subscribe((data: any) => {
-      if(data == false) {
+      if(!data.ok) {
         alert("Error, this user doesn't exist");
       } else {
-        alert("User deleted")
+        alert("User deleted: " + data.username)
       }
     })
   }
@@ -73,7 +73,7 @@ export class AdminComponent implements OnInit {
       if (!data.ok) {
         alert("Error, a channel with this name already exists!");
       } else {
-        alert("Channel Created: " + data.channelName + " in Group: " + data.groupName)
+        alert("Channel Created: " + data.name + " in Group: " + data.group)
       }
     });
     
@@ -84,7 +84,7 @@ export class AdminComponent implements OnInit {
       if (!data.ok) {
         alert("Error, a channel with this name doesn't exist!");
       } else {
-        alert("Channel Removed: " + data.channelName + " in Group: " + data.groupName)
+        alert("Channel Removed: " + data.name + " in Group: " + data.groupName)
       }
     })
   }
@@ -94,7 +94,7 @@ export class AdminComponent implements OnInit {
       if (!data.ok) {
         alert("Error, this user or group doesn't exist");
       } else {
-        alert("User added to " + data.groupName);
+        alert("User added to " + data.group);
       }
     })
   }
@@ -104,7 +104,7 @@ export class AdminComponent implements OnInit {
       if (!data.ok) {
         alert("Error, this user or group doesn't exist");
       } else {
-        alert("User removed from " + data.groupName);
+        alert("User removed from " + data.group);
       }
     })
   }
@@ -114,7 +114,7 @@ export class AdminComponent implements OnInit {
       if (!data.ok) {
         alert("Error, this user or channel or group doesn't exist");
       } else {
-        alert("User added to channel " + data.channelName);
+        alert("User added to channel " + data.name);
       }
     })
   }
@@ -124,7 +124,7 @@ export class AdminComponent implements OnInit {
       if (!data.ok) {
         alert("Error, this user or channel or group doesn't exist");
       } else {
-        alert("User removed from channel " + data.channelName);
+        alert("User removed from channel " + data.name);
       }
     })
   }

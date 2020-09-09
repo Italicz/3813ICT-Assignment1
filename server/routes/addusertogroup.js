@@ -16,7 +16,7 @@ module.exports = function (app) {
                 fs.readFile('./data/groups.json', 'utf8', function(err, data) {
                     if(err) throw err;
                     groups = JSON.parse(data);
-                    let x = groups.find(group => ((group.name == req.body.name)));
+                    let x = groups.find(group => ((group.groupName == req.body.group)));
                     if(!x) {
                         res.send({ok: false});
                     } else {
