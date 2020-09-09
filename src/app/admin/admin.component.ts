@@ -104,7 +104,27 @@ export class AdminComponent implements OnInit {
       if (!data.ok) {
         alert("Error, this user or group doesn't exist");
       } else {
-        alert("User removed from " + data.groupName)
+        alert("User removed from " + data.groupName);
+      }
+    })
+  }
+
+  addUserToChannel() {
+    this.channelService.addUserToChannel(this.groupName, this.channelName, this.username).subscribe((data: any) => {
+      if (!data.ok) {
+        alert("Error, this user or channel or group doesn't exist");
+      } else {
+        alert("User added to channel " + data.channelName);
+      }
+    })
+  }
+
+  deleteUserFromChannel() {
+    this.channelService.deleteUserFromChannel(this.groupName, this.channelName, this.username).subscribe((data: any) => {
+      if (!data.ok) {
+        alert("Error, this user or channel or group doesn't exist");
+      } else {
+        alert("User removed from channel " + data.channelName);
       }
     })
   }

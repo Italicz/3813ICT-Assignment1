@@ -8,8 +8,8 @@ module.exports = function (app) {
     app.post('/api/deleteusergroup', function(req, res){
         fs.readFile('./data/users.json', 'utf8', function(err, userData) {
             if (err) throw err;
-            userlist = JSON.parse(userData);
-            let user = userlist.find(use => ((use.username == req.body.username)));
+            userList = JSON.parse(userData);
+            let user = userList.find(use => ((use.username == req.body.username)));
             if (!user) {
                 res.send({ok: false});
             } else {
