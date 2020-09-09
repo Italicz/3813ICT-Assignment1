@@ -7,18 +7,19 @@ module.exports = function (app) {
     app.use(cors());
     app.post('/api/deletechannel', function(req, res){
 
-        fs.readFile('./data/channels.json', 'utf8', function(err, data) {
+        fs.readFile('./data/groups.json', 'utf8', function(err, data) {
             if (err) throw err;
-            channels = JSON.parse(data)
+            groups = JSON.parse(data)
 
-            let index = channels.findIndex(channel => ((channel.name == req.body.name)));
+            let x = groups.find(group => ((group.groupName == req.body.group)));
+            let index = x.Channels.findIndex(channel => ((channel.name == req.body.name)));
             console.log(index)
             if (index == -1) {
                 res.send({ok: false})
             } else {
-                channels.splice(index, 1)
-                channelsJSON = JSON.stringify(channels)
-                fs.writeFile('./data/channels.json', channelsJSON, 'utf-8', function(err) {
+                x.Channels.splice(index, 1)
+                groupsJSON = JSON.stringify(groups)
+                fs.writeFile('./data/groups.json', groupsJSON, 'utf-8', function(err) {
                     if (err) throw err;
                 
                 });

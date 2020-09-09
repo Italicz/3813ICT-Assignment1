@@ -6,9 +6,16 @@ module.exports = function(app, path) {
     app.use(cors());
     app.post('/api/creategroup', function(req,res){
 
-    var createGroupObj;
-    var createGroupName = req.body.groupName;
+    var groupName = req.body.groupName;
     var groupCreated = 0;
+
+    let newGroup = {
+        'groupName': groupName,
+        'GAssis': [],
+        'GAdmin': [],
+        'Users': [],
+        'Channels': []
+    }
 
     fs.readFile('./data/groups.json', function(err,data) {
         if (err) {
@@ -16,7 +23,7 @@ module.exports = function(app, path) {
         } else {
             createGroupObj = JSON.parse(data);
             for (let i = 0; i < createGroupObj.length; i++) {
-                if(createGroupObj[i].groupName == createGroupName) {
+                if(createGroupObj[i].groupName == newGroup.groupName) {
                     groupCreated = 1;
                 }
             }
@@ -24,13 +31,13 @@ module.exports = function(app, path) {
             if(groupCreated > 0) {
                 res.send({'groupName': '', 'success': false});
             } else {
-                createGroupObj.push({'groupName': createGroupName});
+                createGroupObj.push(newGroup);
             }
 
-            var newGroup = JSON.stringify(createGroupObj);
-            fs.writeFile('./data/groups.json', newGroup, function(err) {
+            var nGroup = JSON.stringify(createGroupObj);
+            fs.writeFile('./data/groups.json', nGroup, function(err) {
                 if(err) throw err;
-                res.send({'groupName': createGroupName, 'success': true});
+                res.send({'groupName': newGroup.groupName, 'success': true});
             })
 
         }

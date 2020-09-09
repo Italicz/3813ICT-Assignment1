@@ -1,6 +1,6 @@
 <body>
-    <div class="login" *ngIf="user.role == 'SAdmin'">
-        <div>
+    <div class="login" *ngIf="user.role == 'SAdmin' || user.role == 'GAdmin' || user.role == 'GAssis'">
+        <div *ngIf="user.role == 'SAdmin'">
             <h3>Create a User:</h3>
             <form>
                 <div class="form-group">
@@ -23,7 +23,7 @@
               </form>
         </div>
         <br>
-        <div>
+        <div *ngIf="user.role == 'SAdmin'">
           <h3>Delete User:</h3>
           <form>
                 <div class="form-group">
@@ -34,7 +34,7 @@
           </form>
         </div>
         <br>
-       <div>
+       <div *ngIf="user.role == 'SAdmin' || user.role == 'GAdmin'">
           <h3>Create Group:</h3>
           <form>
                 <div class="form-group">
@@ -45,7 +45,7 @@
           </form>
         </div>
         <br>
-        <div>
+        <div *ngIf="user.role == 'SAdmin' || user.role == 'GAdmin'">
           <h3>Delete Group:</h3>
           <form>
                 <div class="form-group">
@@ -56,23 +56,27 @@
           </form>
         </div>
         <br>
-        <div>
+        <div *ngIf="user.role == 'SAdmin' || user.role == 'GAdmin' || user.role == 'GAssis'">
           <h3>Create Channel:</h3>
           <form>
                 <div class="form-group">
                   <label for="channelNameLabel">Channel Name</label>
                   <input type="text" [(ngModel)]="channelName" name="channelName" id="channelName" class="form-control">
+                  <label for="groupNameLabel">Group Name</label>
+                  <input type="text" [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
                 </div>
                 <button (click)="createChannel();" class="btn btn-info btn-md">Submit</button>
           </form>
         </div>
         <br>
-        <div>
+        <div *ngIf="user.role == 'SAdmin' || user.role == 'GAdmin' || user.role == 'GAssis'">
           <h3>Delete Channel:</h3>
           <form>
                 <div class="form-group">
                   <label for="channelNameLabel">Channel Name</label>
                   <input type="text" [(ngModel)]="removeChannel" name="channelName" id="channelName" class="form-control">
+                  <label for="groupNameLabel">Group Name</label>
+                  <input type="text" [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
                 </div>
                 <button (click)="deleteChannel();" class="btn btn-info btn-md">Submit</button>
           </form>
@@ -81,19 +85,12 @@
         <!--
             Add user to group
             Delete user from group
-
-            Add channels to group
-            Delete channels from group
             
             Add user to channel
             Delete user from channel
-            
-            Add Group admins
-            Delete Group admins
-
-            Add group assis
-            Delete group assis
-            
         -->
+    </div>
+    <div *ngIf="user.role == 'User'">
+      <p>Sorry you do not have access to this page</p>
     </div>
 </body>

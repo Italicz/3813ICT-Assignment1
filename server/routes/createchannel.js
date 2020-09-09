@@ -10,18 +10,19 @@ module.exports = function (app) {
 
         let newChannel = {
             "name": req.body.name,
-            "users": [],
+            "Users": [],
         }
-        fs.readFile('./data/channels.json', 'utf8', function(err, data) {
+        fs.readFile('./data/groups.json', 'utf8', function(err, data) {
             if (err) throw err;
-            let channels = JSON.parse(data);
-            let exists = channels.find(channel => ((channel.name == req.body.name)));
+            let groups = JSON.parse(data);
+            let x = groups.find(group => ((group.groupName == req.body.group)));
+            let exists = x.Channels.find(channel => ((channel.name == req.body.name)));
             if (exists) {
                 res.send({ok: false})
             } else {
-                channels.push(newChannel);
-                channelsJSON = JSON.stringify(channels)
-                fs.writeFile('./data/channels.json', channelsJSON, 'utf-8', function(err) {
+                x.Channels.push(newChannel);
+                channelsJSON = JSON.stringify(groups)
+                fs.writeFile('./data/groups.json', channelsJSON, 'utf-8', function(err) {
                     if (err) throw err;
                 
                 });
