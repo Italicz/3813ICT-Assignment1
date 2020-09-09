@@ -24,3 +24,7 @@ require('./routes/creategroup.js')(app,path);
 require('./routes/deletegroup.js')(app,path);
 require('./routes/createchannel.js')(app,path);
 require('./routes/deletechannel.js')(app,path);
+require('./routes/addusertogroup.js')(app,path);
+require('./routes/deleteusergroup.js')(app,path);
+//require('./routes/addusertochannel.js')(app,path);
+//require('./routes/deleteuserchannel.js')(app,path);

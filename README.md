@@ -16,6 +16,7 @@ Server-Side data is stored in JSON files. I have three JSON files called users.j
 * Role – String
 ### Groups:
 * Name – String
+* Channels – Array
 ### Channels:
 * Name – String
 * Users – Array

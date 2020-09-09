@@ -16,4 +16,11 @@ export class GroupService {
     return this.httpClient.post("http://localhost:3000/api/deletegroup", {groupName: removeGroup});
   }
 
+  addUserToGroup(name:string, username:string) {
+    return this.httpClient.post("http://localhost:3000/api/addusertogroup", {groupName: name, username: username});
+  }
+
+  deleteUserFromGroup(name:string, username:string) {
+    return this.httpClient.post("http://localhost:3000/api/deleteusergroup", {groupName: name, username: username});
+  }
 }

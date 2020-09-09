@@ -53,7 +53,7 @@ export class AdminComponent implements OnInit {
       if(data == false) {
         alert("Error, this group already exists");
       } else {
-        alert("Group Created");
+        alert("Group Created: " + data.groupName);
       }
     })
   }
@@ -63,7 +63,7 @@ export class AdminComponent implements OnInit {
       if(data == false) {
         alert("Error, this group doesn't exists");
       } else {
-        alert("Group Deleted");
+        alert("Group Deleted: " + data.groupName);
       }
     })
   }
@@ -73,7 +73,7 @@ export class AdminComponent implements OnInit {
       if (!data.ok) {
         alert("Error, a channel with this name already exists!");
       } else {
-        alert("Successfully created channel: " + data.name)
+        alert("Channel Created: " + data.channelName + " in Group: " + data.groupName)
       }
     });
     
@@ -84,7 +84,27 @@ export class AdminComponent implements OnInit {
       if (!data.ok) {
         alert("Error, a channel with this name doesn't exist!");
       } else {
-        alert("Successfully deleted channel: " + data.name)
+        alert("Channel Removed: " + data.channelName + " in Group: " + data.groupName)
+      }
+    })
+  }
+
+  addUserToGroup() {
+    this.groupService.addUserToGroup(this.groupName, this.username).subscribe((data: any) => {
+      if (!data.ok) {
+        alert("Error, this user or group doesn't exist");
+      } else {
+        alert("User added to " + data.groupName);
+      }
+    })
+  }
+
+  deleteUserFromGroup() {
+    this.groupService.deleteUserFromGroup(this.groupName, this.username).subscribe((data: any) => {
+      if (!data.ok) {
+        alert("Error, this user or group doesn't exist");
+      } else {
+        alert("User removed from " + data.groupName)
       }
     })
   }
