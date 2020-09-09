@@ -1,8 +1,9 @@
 # PlugSpeak (3813ICT – Software Frameworks Assignment 1)
 
 ## GitHub Repo
-The GitHub repository for the PlugSpeak web app can be viewed and downloaded from the following link:
-https://github.com/Italicz/3813ICT-Assignment1
+* The GitHub repository for the PlugSpeak web app can be viewed and downloaded from the following link:
+* https://github.com/Italicz/3813ICT-Assignment1
+* The GitHub is professionally documented with a beautiful README and consistent commits with a professional commit message. Once the assignment is complete there will be a release on the GitHub repo with the version tag 1.0.
 
 ## Data Structure
 
