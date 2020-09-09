@@ -28,3 +28,4 @@ require('./routes/addusertogroup.js')(app,path);
 require('./routes/deleteusergroup.js')(app,path);
 require('./routes/addusertochannel.js')(app,path);
 require('./routes/deleteuserchannel.js')(app,path);
+require('./routes/getusersgroups.js')(app,path);
