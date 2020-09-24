@@ -1,31 +1,35 @@
 var express = require('express');
 var app = express();
-var path = require("path");
+const server = require('./listen.js');
+const http = require('http').Server(app);
 
+const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
+const PORT=3000;
 var cors = require('cors');
 app.use(cors());
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+const mongoURL = 'mongodb://localhost:27017';
 
-app.use(express.static(__dirname + '/../dist/assignment1'));
-console.log(__dirname);
-
-var http = require('http').Server(app);
-var server = http.listen(3000, function(){
-    console.log("Server listening on port: 3000");
-});
-
-require('./routes/auth.js')(app,path);
-require('./routes/createuser.js')(app,path);
-require('./routes/deleteuser.js')(app,path);
-require('./routes/creategroup.js')(app,path);
-require('./routes/deletegroup.js')(app,path);
-require('./routes/createchannel.js')(app,path);
-require('./routes/deletechannel.js')(app,path);
-require('./routes/addusertogroup.js')(app,path);
-require('./routes/deleteusergroup.js')(app,path);
-require('./routes/addusertochannel.js')(app,path);
-require('./routes/deleteuserchannel.js')(app,path);
-require('./routes/getusersgroups.js')(app,path);
+MongoClient.connect(mongoURL, {poolSize: 10, useNewUrlParser: true, useUnifiedTopology: true}, function(err, client) {
+    if (err) {
+        return console.log(err)
+    }
+    const db = client.db('assignment2')
+    require('./routes/auth.js')(app,db);
+    require('./routes/createuser.js')(app,db);
+    require('./routes/deleteuser.js')(app,db);
+    require('./routes/creategroup.js')(app,db);
+    require('./routes/deletegroup.js')(app,db);
+    require('./routes/createchannel.js')(app,db);
+    require('./routes/deletechannel.js')(app,db);
+    require('./routes/addusertogroup.js')(app,db);
+    require('./routes/deleteusergroup.js')(app,db);
+    require('./routes/addusertochannel.js')(app,db);
+    require('./routes/deleteuserchannel.js')(app,db);
+    require('./routes/getusersgroups.js')(app,db);
+    server.listen(http, PORT);
+})
