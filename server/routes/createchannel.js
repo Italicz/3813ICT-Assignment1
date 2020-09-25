@@ -1,34 +1,33 @@
 const bodyParser = require("body-parser");
 const cors = require('cors');
-const fs = require("fs");
-
-module.exports = function (app) {
+module.exports = function (app, db) {
     app.use(bodyParser.json());
     app.use(cors());
-    app.post('/api/createchannel', function(req, res){
+    app.post('/api/createchannel', function (req, res) {
         console.log(req.body)
+
+        var groupName = req.body.group;
+        var channelName = req.body.name;
 
         let newChannel = {
             "name": req.body.name,
+            "group": req.body.group,
             "Users": [],
         }
-        fs.readFile('./data/groups.json', 'utf8', function(err, data) {
-            if (err) throw err;
-            let groups = JSON.parse(data);
-            let x = groups.find(group => ((group.groupName == req.body.group)));
-            let exists = x.Channels.find(channel => ((channel.name == req.body.name)));
-            if (exists) {
-                res.send({ok: false})
-            } else {
-                x.Channels.push(newChannel);
-                channelsJSON = JSON.stringify(groups)
-                fs.writeFile('./data/groups.json', channelsJSON, 'utf-8', function(err) {
-                    if (err) throw err;
-                
+
+        const collection = db.collection('channels');
+        collection.find({ 'name': channelName }).count((err, count) => {
+            if (count == 0) {
+                collection.insertOne(newChannel, (err, dbres) => {
+                    if (err) {
+                        throw err;
+                    }
+                    let num = dbres.insertedCount;
+                    res.send({ num: num, err: null, ok: true })
                 });
-                newChannel.ok = true
-                res.send(newChannel)
+            } else {
+                res.send({ ok: false });
             }
-        });
+        })
     });
 }

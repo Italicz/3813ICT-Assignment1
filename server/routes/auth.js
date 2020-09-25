@@ -13,14 +13,17 @@ module.exports = function (app, db) {
         user.username = '';
 
         const collection = db.collection('users');
-        collection.find({username: req.body.username, password: req.body.password}).toArray((err, data) => {
+        collection.findOne({username: req.body.username, password: req.body.password}, (err, user) => {
             if (err) {
                 throw err;
             }
-            if (data.length) {
-                res.send({ok: false})
+            if (user) {
+                console.log(user)
+                user.ok = true;
+                res.send(user)
+               
             } else {
-                res.send(data)
+                res.send({ok: false})
             }
         })
     })
