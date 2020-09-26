@@ -104,7 +104,7 @@ export class AdminComponent implements OnInit {
   }
 
   addUserToChannel() {
-    this.channelService.addUserToChannel(this.groupName, this.channelName, this.username).subscribe((data: any) => {
+    this.channelService.addUserToChannel(this.user, this.groupName, this.channelName, this.username).subscribe((data: any) => {
       if (!data.ok) {
         alert("Error, this user or channel or group doesn't exist");
       } else {
@@ -114,7 +114,7 @@ export class AdminComponent implements OnInit {
   }
 
   deleteUserFromChannel() {
-    this.channelService.deleteUserFromChannel(this.groupName, this.channelName, this.username).subscribe((data: any) => {
+    this.channelService.deleteUserFromChannel(this.user, this.groupName, this.channelName, this.username).subscribe((data: any) => {
       if (!data.ok) {
         alert("Error, this user or channel or group doesn't exist");
       } else {

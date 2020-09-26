@@ -17,12 +17,12 @@ export class ChannelService {
     return this.httpClient.post("http://localhost:3000/api/deletechannel", {user: user, id: id});
   }
 
-  addUserToChannel(groupName:string, channelName:string, username:string) {
-    return this.httpClient.post("http://localhost:3000/api/addusertochannel", {group: groupName, name: channelName, username: username});
+  addUserToChannel(user:User, groupName:string, channelName:string, username:string) {
+    return this.httpClient.post("http://localhost:3000/api/addusertochannel", {user: user, group: groupName, name: channelName, username: username});
   }
 
-  deleteUserFromChannel(groupName:string, channelName:string, username:string) {
-    return this.httpClient.post("http://localhost:3000/api/deleteuserchannel", {group: groupName, name: channelName, username: username});
+  deleteUserFromChannel(user:User, groupName:string, channelName:string, username:string) {
+    return this.httpClient.post("http://localhost:3000/api/deleteuserchannel", {user: user, group: groupName, name: channelName, username: username});
   }
 
   getChannels() {

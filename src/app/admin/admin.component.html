@@ -109,7 +109,7 @@
             <tr style="padding-top: 20px;" *ngFor="let channel of channels">
               <td>{{channel.name}}</td>
               <td>{{channel.group}}</td>
-              <td>{{channel.users}}</td>
+              <td>{{channel.Users}}</td>
               <td><span class="btn btn-primary" (click)="deleteChannel(channel._id)"><i class="fa fa-trash"></i>Delete</span></td>
             </tr>
           </table>
@@ -131,12 +131,14 @@
           <h3>Add User To Channel:</h3>
           <form>
                 <div class="form-group">
-                  <label for="groupNameLabel">Group Name</label>
-                  <input type="text" [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
                   <label for="groupNameLabel">Channel Name</label>
-                  <input type="text" [(ngModel)]="channelName" name="channelName" id="channelName" class="form-control">
+                  <select [(ngModel)]="channelName" name="channelName" id="channelName" class="form-control">
+                    <option *ngFor="let channel of channels" [value]="channel.name">{{channel.name}}
+                  </select>
                   <label for="groupNameLabel">User's Name</label>
-                  <input type="text" [(ngModel)]="username" name="username" id="username" class="form-control">
+                  <select [(ngModel)]="username" name="username" id="username" class="form-control">
+                    <option *ngFor="let user of users" [value]="user.username">{{user.username}}
+                  </select>
                 </div>
                 <button (click)="addUserToChannel();" class="btn btn-info btn-md">Submit</button>
           </form>
@@ -146,12 +148,14 @@
           <h3>Remove User from Channel:</h3>
           <form>
                 <div class="form-group">
-                  <label for="groupNameLabel">Group Name</label>
-                  <input type="text" [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
                   <label for="groupNameLabel">Channel Name</label>
-                  <input type="text" [(ngModel)]="channelName" name="channelName" id="channelName" class="form-control">
+                  <select [(ngModel)]="channelName" name="channelName" id="channelName" class="form-control">
+                    <option *ngFor="let channel of channels" [value]="channel.name">{{channel.name}}
+                  </select>
                   <label for="groupNameLabel">User's Name</label>
-                  <input type="text" [(ngModel)]="username" name="username" id="username" class="form-control">
+                  <select [(ngModel)]="username" name="username" id="username" class="form-control">
+                    <option *ngFor="let user of users" [value]="user.username">{{user.username}}
+                  </select>
                 </div>
                 <button (click)="deleteUserFromChannel();" class="btn btn-info btn-md">Submit</button>
           </form>
