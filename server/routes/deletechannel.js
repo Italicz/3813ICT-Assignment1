@@ -1,30 +1,21 @@
-const bodyParser = require("body-parser");
-const cors = require('cors');
-const fs = require("fs");
-
-module.exports = function (app) {
-    app.use(bodyParser.json());
-    app.use(cors());
+ module.exports = function (app, db, ObjectID) {
     app.post('/api/deletechannel', function(req, res){
 
-        fs.readFile('./data/groups.json', 'utf8', function(err, data) {
-            if (err) throw err;
-            groups = JSON.parse(data)
+        channel = req.body;
 
-            let x = groups.find(group => ((group.groupName == req.body.group)));
-            let index = x.Channels.findIndex(channel => ((channel.name == req.body.name)));
-            console.log(index)
-            if (index == -1) {
-                res.send({ok: false})
-            } else {
-                x.Channels.splice(index, 1)
-                groupsJSON = JSON.stringify(groups)
-                fs.writeFile('./data/groups.json', groupsJSON, 'utf-8', function(err) {
-                    if (err) throw err;
-                
-                });
-                res.send({ok : true})
+        var channelID = new ObjectID(channel.id);
+        const collection = db.collection('channels');
+        collection.deleteOne({_id: channelID}, (err, docs) => {
+            if (err) {
+                throw err;
             }
-        });
+            collection.find({}).toArray((err, data) => {
+                if (err) {
+                    throw err;
+                }
+                res.send(data);
+            })
+        })
+
     });
 }

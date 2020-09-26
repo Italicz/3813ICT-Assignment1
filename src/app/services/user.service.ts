@@ -12,7 +12,11 @@ export class UserService {
       return this.httpClient.post("http://localhost:3000/api/createuser", {username: username, email: email, password: password, role: role});
   }
 
-  deleteUser(removeUser) {
-    return this.httpClient.post("http://localhost:3000/api/deleteuser", {username: removeUser});
+  deleteUser(id) {
+    return this.httpClient.post("http://localhost:3000/api/deleteuser", {id: id});
+  }
+
+  getUsers() {
+    return this.httpClient.get("http://localhost:3000/api/getusers");
   }
 }

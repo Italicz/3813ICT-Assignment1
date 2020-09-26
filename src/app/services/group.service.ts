@@ -12,8 +12,8 @@ export class GroupService {
     return this.httpClient.post("http://localhost:3000/api/creategroup", {groupName: groupName});
   }
 
-  deleteGroup(removeGroup) {
-    return this.httpClient.post("http://localhost:3000/api/deletegroup", {groupName: removeGroup});
+  deleteGroup(id) {
+    return this.httpClient.post("http://localhost:3000/api/deletegroup", {id: id});
   }
 
   addUserToGroup(groupName:string, username:string) {
@@ -26,5 +26,9 @@ export class GroupService {
 
   getUsersGroups(username:string) {
     return this.httpClient.post("http://localhost:3000/api/getusersgroups", {username: username});
+  }
+
+  getGroups() {
+    return this.httpClient.get("http://localhost:3000/api/getgroups");
   }
 }

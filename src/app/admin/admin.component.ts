@@ -10,10 +10,13 @@ import { ChannelService } from '../services/channel.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  user:User;
 
   constructor(private userService:UserService, private groupService:GroupService, private channelService:ChannelService) { }
 
+  users = [];
+  groups = [];
+  channels = [];
+  user:User;
   username:string;
   email:string;
   password:string;
@@ -26,6 +29,9 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('currentUser'))
+    this.getUsers();
+    this.getGroups();
+    this.getChannels();
   }
 
   createAccount() {
@@ -38,13 +44,9 @@ export class AdminComponent implements OnInit {
     })
   }
 
-  deleteUser() {
-    this.userService.deleteUser(this.removeUser).subscribe((data: any) => {
-      if(!data.ok) {
-        alert("Error, this user doesn't exist");
-      } else {
-        alert("User deleted: " + data.username)
-      }
+  deleteUser(id) {
+    this.userService.deleteUser(id).subscribe((data: any) => {
+      this.users = data;
     })
   }
 
@@ -58,13 +60,9 @@ export class AdminComponent implements OnInit {
     })
   }
 
-  deleteGroup() {
-    this.groupService.deleteGroup(this.removeGroup).subscribe((data: any) => {
-      if(data == false) {
-        alert("Error, this group doesn't exists");
-      } else {
-        alert("Group Deleted: " + data.groupName);
-      }
+  deleteGroup(id) {
+    this.groupService.deleteGroup(id).subscribe((data: any) => {
+      this.groups = data;
     })
   }
 
@@ -79,13 +77,9 @@ export class AdminComponent implements OnInit {
     
   }
 
-  deleteChannel() {
-    this.channelService.deleteChannel(this.groupName, this.removeChannel).subscribe((data: any) => {
-      if (!data.ok) {
-        alert("Error, a channel with this name doesn't exist!");
-      } else {
-        alert("Channel Removed: " + data.name + " in Group: " + data.groupName)
-      }
+  deleteChannel(id) {
+    this.channelService.deleteChannel(this.user, id).subscribe((data: any) => {
+      this.channels = data;
     })
   }
 
@@ -126,6 +120,24 @@ export class AdminComponent implements OnInit {
       } else {
         alert("User removed from channel " + data.name);
       }
+    })
+  }
+
+  getUsers() {
+    this.userService.getUsers().subscribe((data: any) => {
+      this.users = data;
+    })
+  }
+
+  getGroups() {
+    this.groupService.getGroups().subscribe((data: any) => {
+      this.groups = data;
+    })
+  }
+
+  getChannels() {
+    this.channelService.getChannels().subscribe((data: any) => {
+      this.channels = data;
     })
   }
 
