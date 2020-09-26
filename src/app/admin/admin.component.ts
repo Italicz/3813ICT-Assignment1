@@ -84,7 +84,7 @@ export class AdminComponent implements OnInit {
   }
 
   addUserToGroup() {
-    this.groupService.addUserToGroup(this.groupName, this.username).subscribe((data: any) => {
+    this.groupService.addUserToGroup(this.user, this.groupName, this.username).subscribe((data: any) => {
       if (!data.ok) {
         alert("Error, this user or group doesn't exist");
       } else {
@@ -94,7 +94,7 @@ export class AdminComponent implements OnInit {
   }
 
   deleteUserFromGroup() {
-    this.groupService.deleteUserFromGroup(this.groupName, this.username).subscribe((data: any) => {
+    this.groupService.deleteUserFromGroup(this.user, this.groupName, this.username).subscribe((data: any) => {
       if (!data.ok) {
         alert("Error, this user or group doesn't exist");
       } else {

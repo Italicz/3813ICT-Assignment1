@@ -31,7 +31,11 @@
                   </div>
                   <div class="form-group">
                     <label for="role">Role</label>
-                    <input type="text" [(ngModel)]="role" name="role" class="form-control">
+                    <select [(ngModel)]="role" name="role" class="form-control">
+                      <option>GAdmin</option>
+                      <option>GAssis</option>
+                      <option>User</option>
+                    </select>
                   </div>
                 <button (click)="createAccount();" class="btn btn-info btn-md">Submit</button>
               </form>
@@ -65,9 +69,13 @@
           <form>
                 <div class="form-group">
                   <label for="groupNameLabel">Group Name</label>
-                  <input type="text" [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
+                  <select [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
+                    <option *ngFor="let group of groups" [value]="group.groupName">{{group.groupName}}
+                  </select>
                   <label for="groupNameLabel">User's Name</label>
-                  <input type="text" [(ngModel)]="username" name="username" id="username" class="form-control">
+                  <select [(ngModel)]="username" name="username" id="username" class="form-control">
+                    <option *ngFor="let user of users" [value]="user.username">{{user.username}}
+                  </select>
                 </div>
                 <button (click)="addUserToGroup();" class="btn btn-info btn-md">Submit</button>
           </form>
@@ -78,9 +86,13 @@
           <form>
                 <div class="form-group">
                   <label for="groupNameLabel">Group Name</label>
-                  <input type="text" [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
+                  <select [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
+                    <option *ngFor="let group of groups" [value]="group.groupName">{{group.groupName}}
+                  </select>
                   <label for="groupNameLabel">User's Name</label>
-                  <input type="text" [(ngModel)]="username" name="username" id="username" class="form-control">
+                  <select [(ngModel)]="username" name="username" id="username" class="form-control">
+                    <option *ngFor="let user of users" [value]="user.username">{{user.username}}
+                  </select>
                 </div>
                 <button (click)="deleteUserFromGroup();" class="btn btn-info btn-md">Submit</button>
           </form>
@@ -107,22 +119,11 @@
                   <label for="channelNameLabel">Channel Name</label>
                   <input type="text" [(ngModel)]="channelName" name="channelName" id="channelName" class="form-control">
                   <label for="groupNameLabel">Group Name</label>
-                  <input type="text" [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
+                  <select [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
+                    <option *ngFor="let group of groups" [value]="group.groupName">{{group.groupName}}
+                  </select>
                 </div>
                 <button (click)="createChannel();" class="btn btn-info btn-md">Submit</button>
-          </form>
-        </div>
-        <br>
-        <div *ngIf="user.role == 'SAdmin' || user.role == 'GAdmin' || user.role == 'GAssis'">
-          <h3>Delete Channel:</h3>
-          <form>
-                <div class="form-group">
-                  <label for="channelNameLabel">Channel Name</label>
-                  <input type="text" [(ngModel)]="removeChannel" name="channelName" id="channelName" class="form-control">
-                  <label for="groupNameLabel">Group Name</label>
-                  <input type="text" [(ngModel)]="groupName" name="groupName" id="groupName" class="form-control">
-                </div>
-                <button (click)="deleteChannel();" class="btn btn-info btn-md">Submit</button>
           </form>
         </div>
         <br>

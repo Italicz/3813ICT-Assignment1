@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { User } from '../user';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,12 @@ export class GroupService {
     return this.httpClient.post("http://localhost:3000/api/deletegroup", {id: id});
   }
 
-  addUserToGroup(groupName:string, username:string) {
-    return this.httpClient.post("http://localhost:3000/api/addusertogroup", {group: groupName, username: username});
+  addUserToGroup(user:User, groupName:string, username:string) {
+    return this.httpClient.post("http://localhost:3000/api/addusertogroup", {user: user, group: groupName, username: username});
   }
 
-  deleteUserFromGroup(groupName:string, username:string) {
-    return this.httpClient.post("http://localhost:3000/api/deleteusergroup", {group: groupName, username: username});
+  deleteUserFromGroup(user:User, groupName:string, username:string) {
+    return this.httpClient.post("http://localhost:3000/api/deleteusergroup", {user: user, group: groupName, username: username});
   }
 
   getUsersGroups(username:string) {
