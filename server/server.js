@@ -5,6 +5,12 @@ const http = require('http').Server(app);
 
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
+
+const io = require('socket.io')(http);
+const sockets = require('./socket.js');
+const formidable = require('formidable');
+const path = require('path');
+
 const PORT=3000;
 var cors = require('cors');
 app.use(cors());
@@ -35,4 +41,7 @@ MongoClient.connect(mongoURL, {poolSize: 10, useNewUrlParser: true, useUnifiedTo
     require('./routes/getgroups.js')(app,db);
     require('./routes/getchannels.js')(app,db);
     server.listen(http, PORT);
+    sockets.connect(io, PORT, db);
 })
+
+module.exports = app;
