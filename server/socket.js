@@ -2,7 +2,9 @@ module.exports = {
   connect: function(io, PORT, db) {
     var socketRoom = [];
     var rooms = [];
+    //Access channels collection
     const collection = db.collection('channels');
+    //Find all channels
     collection.find({}).toArray((err, data) => {
       if(err) {
         throw err;
@@ -15,6 +17,7 @@ module.exports = {
     const chat = io.of('/chat');
 
     chat.on('connection', (socket) => {
+      //Connection
       console.log("User connection on port " + PORT + ": " + socket.id);
       socket.on('message', (message) => {
         console.log(message);
@@ -27,6 +30,7 @@ module.exports = {
       });
 
       socket.on('joinRoom', (data) => {
+        //Join room
         if (rooms.includes(data.room)) {
           socket.join(data.room, () => {
             var inroomSocketArray = false;
@@ -45,6 +49,7 @@ module.exports = {
       });
 
       socket.on('leaveRoom', (data) => {
+        //Leave room
         for (let i=0; i < socketRoom.length; i++) {
           if (socketRoom[i][0] == socket.id) {
             socketRoom.splice(i, 1);
@@ -55,6 +60,7 @@ module.exports = {
       });
 
       socket.on('disconnect', () => {
+        //Disconnect
         for (let i=0; i < socketRoom.length; i++) {
           if (socketRoom[i][0] == socket.id) {
             socketRoom.splice(i, 1);

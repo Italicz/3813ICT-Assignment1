@@ -26,6 +26,7 @@ export class ChatComponent implements OnInit {
   currentChannel: any;
   inRoom: boolean;
 
+  //Initialise with current user, get all groups and all channels for this user and intialise the socket
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.inRoom = false;
@@ -46,11 +47,13 @@ export class ChatComponent implements OnInit {
   }
 
 
+  //Join channel
   join() {
     this.socketService.join(this.currentChannel, this.user.username);
     this.inRoom = true;
   }
 
+  //Leave channel
   leave() {
     this.socketService.leave(this.currentChannel, this.user.username);
     this.inRoom = false;
@@ -58,18 +61,21 @@ export class ChatComponent implements OnInit {
     this.messages = [];
   }
 
+  //Get users groups
   getGroups() {
     this.groupService.getGroups().subscribe((data: any) => {
       this.groups = data;
     })
   }
 
+  //Get users channels
   getChannels() {
     this.channelService.getChannels().subscribe((data: any) => {
       this.channels = data;
     })
   }
 
+  //Add a new message in a channel
   addChat() {
     this.channelName = sessionStorage.getItem('channelName');
     if(!this.newMessage) {
@@ -85,6 +91,7 @@ export class ChatComponent implements OnInit {
     });
   }
 
+  //Get all messages for a channel
   getChats(name) {
     sessionStorage.setItem("channelName", name);
     this.currentChannel = name;

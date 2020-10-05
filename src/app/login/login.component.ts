@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+  //Register account by routing through the auth
   registeredAccount() {
     let user = {username: this.username, password: this.password};
     this.httpClient.post(backUrl + '/api/auth', user, httpOptions).subscribe((data:any) => {

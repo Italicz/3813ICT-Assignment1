@@ -11,6 +11,7 @@ export class AppComponent {
 
   constructor(private router: Router){}
 
+  //Log out button clears local storage
   logOut(){
     localStorage.clear();
     this.router.navigate(['/']);
