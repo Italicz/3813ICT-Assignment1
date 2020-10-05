@@ -58,7 +58,6 @@ export class ChatComponent implements OnInit {
     this.messages = [];
   }
 
-
   getGroups() {
     this.groupService.getGroups().subscribe((data: any) => {
       this.groups = data;
@@ -68,6 +67,30 @@ export class ChatComponent implements OnInit {
   getChannels() {
     this.channelService.getChannels().subscribe((data: any) => {
       this.channels = data;
+    })
+  }
+
+  addChat() {
+    this.channelName = sessionStorage.getItem('channelName');
+    if(!this.newMessage) {
+      alert("Error, you can't submit an empty chat");
+    }
+    this.msg = {
+      user: this.user.username,
+      message: this.newMessage
+    }
+    this.socketService.send(this.msg);
+    this.chatService.addChat(this.channelName, this.newMessage, this.user.username).subscribe((data: any) => {
+      this.newMessage = "";
+    });
+  }
+
+  getChats(name) {
+    sessionStorage.setItem("channelName", name);
+    this.currentChannel = name;
+    this.join();
+    this.chatService.getChats(name).subscribe((data: any) => {
+      this.messages = data;
     })
   }
 

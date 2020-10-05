@@ -40,6 +40,8 @@ MongoClient.connect(mongoURL, {poolSize: 10, useNewUrlParser: true, useUnifiedTo
     require('./routes/getusers.js')(app,db);
     require('./routes/getgroups.js')(app,db);
     require('./routes/getchannels.js')(app,db);
+    require('./routes/addchat.js')(app, db);
+    require('./routes/getchats.js')(app, db);
     server.listen(http, PORT);
     sockets.connect(io, PORT, db);
 })
