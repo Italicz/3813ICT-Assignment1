@@ -1,10 +1,33 @@
-<h3>Hi {{user.username}} Welcome to PlugSpeak!</h3>
-<h4> Here is a list of your groups and channels! Have a good day.</h4>
-<ng-container *ngFor="let group of groups">
-    {{group.groupName}}
-    <div *ngFor="let channel of group.Channels">
-        <ul *ngIf="channel.Users.includes(user.username)">
-            <li>{{ channel.name}}</li>
-        </ul>
+<div class="container">
+  <h1>Chats</h1>
+  <div class="row">
+    <div class="col-lg-4" *ngIf="!inRoom">
+      <div *ngFor="let group of groups">
+        <div *ngIf="group.Users.includes(user.username)">
+          <h3>{{group.groupName}}</h3>
+        </div>
+        <div *ngFor="let channel of channels">
+          <button *ngIf="channel.group==group.groupName && channel.Users.includes(user.username) && group.Users.includes(user.username)" (click)="getChats(channel.name)" class="btn btn-primary btn-lg">{{channel.name}}</button>
+        </div>
+      </div>
     </div>
-</ng-container>
+    <div class="col-lg-8">
+      <div class="grid-element main">
+        <div *ngFor="let message of messages">
+          <div *ngIf="message.user==user.username" style="text-align:right; color:black;">You ({{message.user}})</div>
+          <div *ngIf="message.user==user.username" style="text-align:right;" >{{message.message}}</div>
+          <div *ngIf="message.user!==user.username" style="text-align:left; color:red;">({{message.user}})</div>
+          <div *ngIf="message.user!==user.username" style="text-align:left;" >{{message.message}}</div>
+        </div>
+      </div>
+      <div class="grid-element chat" *ngIf="inRoom">
+        <form class="form-group">
+          <input placeholder="Type here to send a message" type="text" class="form-control" [(ngModel)]="newMessage" name="chatMessage">
+          <br>
+          <button class="btn btn-primary btn-lg btn-block" (click)="addChat()" type="submit">Post</button>
+          <button class="btn btn-primary btn-lg btn-block" (click)="leave()" type="submit">Leave Room</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
