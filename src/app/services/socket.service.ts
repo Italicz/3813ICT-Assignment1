@@ -26,5 +26,17 @@ export class SocketService {
     return observable;
   }
 
+  public join(room, username) {
+    this.socket.emit('joinRoom', {room, username})
+  }
+
+  public leave(room, username) {
+    this.socket.emit('leaveRoom', {room, username})
+  }
+
+  public send(message: string) {
+    this.socket.emit('message', message)
+  }
+
   constructor() { }
 }

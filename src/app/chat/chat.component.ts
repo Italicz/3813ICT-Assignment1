@@ -45,6 +45,20 @@ export class ChatComponent implements OnInit {
 
   }
 
+
+  join() {
+    this.socketService.join(this.currentChannel, this.user.username);
+    this.inRoom = true;
+  }
+
+  leave() {
+    this.socketService.leave(this.currentChannel, this.user.username);
+    this.inRoom = false;
+    this.currentChannel = "";
+    this.messages = [];
+  }
+
+
   getGroups() {
     this.groupService.getGroups().subscribe((data: any) => {
       this.groups = data;
