@@ -23,7 +23,6 @@ module.exports = {
         console.log(message);
         for (i=0; i < socketRoom.length; i++) {
           if (socketRoom[i][0] == socket.id) {
-            console.log('im emitting it');
             chat.to(socketRoom[i][1]).emit('message', message);
           }
         }

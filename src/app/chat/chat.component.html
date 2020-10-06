@@ -1,17 +1,17 @@
 <div class="container">
-  <h1>Chats</h1>
   <div class="row">
-    <div class="col-lg-4" *ngIf="!inRoom">
+    <div class="col-lg-12" *ngIf="!inRoom">
+    <h1>Hello {{user.username}}! Here are your chat rooms!</h1>
       <div *ngFor="let group of groups">
         <div *ngIf="group.Users.includes(user.username)">
           <h3>{{group.groupName}}</h3>
         </div>
         <div *ngFor="let channel of channels">
-          <button *ngIf="channel.group==group.groupName && channel.Users.includes(user.username) && group.Users.includes(user.username)" (click)="getChats(channel.name)" class="btn btn-primary btn-lg">{{channel.name}}</button>
+          <button *ngIf="channel.group==group.groupName && channel.Users.includes(user.username) && group.Users.includes(user.username)" (click)="getChats(channel.name)" class="btn btn-primary">{{channel.name}}</button>
         </div>
       </div>
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-12">
       <div class="grid-element main">
         <div *ngFor="let message of messages">
           <div *ngIf="message.user==user.username" style="text-align:right; color:black;">You ({{message.user}})</div>
@@ -24,8 +24,8 @@
         <form class="form-group">
           <input placeholder="Type here to send a message" type="text" class="form-control" [(ngModel)]="newMessage" name="chatMessage">
           <br>
-          <button class="btn btn-primary btn-lg btn-block" (click)="addChat()" type="submit">Post</button>
-          <button class="btn btn-primary btn-lg btn-block" (click)="leave()" type="submit">Leave Room</button>
+          <button class="btn btn-primary btn-block" (click)="addChat()" type="submit">Send Message</button>
+          <button class="btn btn-primary btn-block" (click)="leave()" type="submit">Leave Room</button>
         </form>
       </div>
     </div>
